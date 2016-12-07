@@ -1,5 +1,6 @@
 <template>
   <div class="content has-text-centered">
+  
     <p>
       <img width="80" src="~assets/logo.png" alt="Vue Admin Panel Framework">
     </p>

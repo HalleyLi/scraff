@@ -6,9 +6,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as filters from './filters'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(Resource)
 Vue.use(NProgress)
+Vue.use(ElementUI)
 
 sync(store, router)
 

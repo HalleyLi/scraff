@@ -31,8 +31,10 @@ export default {
 </script>
 <style lang="scss">
 @import '~bulma/sass/utilities/variables';
+
 .hero .nav {
     background: #3B3F51;
+    min-height: 60px  !important;
 }
 
 .app-navbar {

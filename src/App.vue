@@ -9,6 +9,7 @@
 </template>
 <script>
 import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
+
 import {
     Navbar,
     AppMain,
