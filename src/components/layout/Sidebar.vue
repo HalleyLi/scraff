@@ -33,19 +33,19 @@
     <aside>
         <el-row class="app-sidebar animated" :class="{ slideInLeft: show, slideOutLeft: !show }">
             <el-col :span="8">
-                <el-menu class="el-menu-vertical" v-for="item in menu">
-                    <el-submenu index="item.index" v-if="item.children && item.children.length">
+                <el-menu class="el-menu-vertical" v-for="(item,index) in menu">
+                    <el-submenu index="index" v-if="item.children && item.children.length">
                         <template slot="title">
                             <i :class="[item.meta.icon]"></i> {{ item.name }}</template>
                         <router-link :to="item.path" :exact="true" v-if="item.path">
                         </router-link>
-                        <el-menu-item index="subItem.index" v-for="subItem in item.children" v-if="subItem.path">
+                        <el-menu-item index="index" v-for="subItem in item.children" v-if="subItem.path">
                             <router-link :to="generatePath(item, subItem)">
                                {{ subItem.name }}
                             </router-link>
                         </el-menu-item>
                     </el-submenu>
-                    <el-menu-item index="item.index" v-else>
+                    <el-menu-item index="index" v-else>
                         <router-link :to="item.path" :exact="true" v-if="item.path">
                             <i :class="[item.meta.icon]"></i>{{ item.meta.label || item.name }}
                         </router-link>
@@ -77,7 +77,6 @@ export default {
         let route = this.$route
         if (route.name) {
             this.isReady = true
-            this.shouldExpandMatchItem(route)
         }
     },
 
@@ -88,30 +87,6 @@ export default {
     },
 
     methods: {
-        isExpanded(item) {
-            return item.meta.expanded
-        },
-
-        toggle(item) {
-            item.meta.expanded = !item.meta.expanded
-        },
-
-        shouldExpandMatchItem(route) {
-            let matched = route.matched
-            let lastMatched = matched[matched.length - 1]
-            let parent = lastMatched.parent || lastMatched
-
-            if (parent === lastMatched) {
-                const p = this.findParentFromMenu(route)
-                if (p) {
-                    parent = p
-                }
-            }
-
-            if ('expanded' in parent.meta && parent !== lastMatched) {
-                parent.meta.expanded = true
-            }
-        },
 
         generatePath(item, subItem) {
             return `${item.component ? item.path + '/' : ''}${subItem.path}`
@@ -136,7 +111,6 @@ export default {
     watch: {
         $route(route) {
             this.isReady = true
-            this.shouldExpandMatchItem(route)
         }
     }
 

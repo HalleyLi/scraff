@@ -84,3 +84,5 @@ $fa-font-path: '~font-awesome/fonts/';
     }
 }
 </style>
+<!-- 全局样式 -->
+<style lang="scss" src='./assets/style/portlet.scss'></style>
